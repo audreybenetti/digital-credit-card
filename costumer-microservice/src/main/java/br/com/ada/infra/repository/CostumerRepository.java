@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface CostumerRepository extends JpaRepository<Costumer, Long> {
     Optional<Costumer> findByCpf(String cpf);
-    Optional<Costumer> deleteByCpf(String cpf);
+
 }

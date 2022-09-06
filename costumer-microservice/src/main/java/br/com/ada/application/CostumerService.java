@@ -3,8 +3,8 @@ package br.com.ada.application;
 import br.com.ada.domain.Costumer;
 import br.com.ada.infra.repository.CostumerRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service

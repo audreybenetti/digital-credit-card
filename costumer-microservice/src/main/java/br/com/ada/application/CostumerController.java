@@ -1,6 +1,7 @@
 package br.com.ada.application;
 
 import br.com.ada.application.representation.CostumerRequest;
+import br.com.ada.domain.Costumer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -23,7 +24,7 @@ public class CostumerController {
     }
 
     @PostMapping
-    public ResponseEntity save(@RequestBody CostumerRequest request){
+    public ResponseEntity<?> save(@RequestBody CostumerRequest request){
         var costumer = request.toModel();
         service.save(costumer);
         URI headerLocation = ServletUriComponentsBuilder
@@ -35,12 +36,11 @@ public class CostumerController {
     }
 
     @GetMapping(params = "cpf")
-    public ResponseEntity getCostumer(@RequestParam("cpf") String cpf){
+    public ResponseEntity<?> getCostumer(@RequestParam("cpf") String cpf){
         var costumer = service.getByCpf(cpf);
         if (costumer.isEmpty()){
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(costumer);
     }
-
 }
