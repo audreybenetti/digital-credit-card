@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("costumers")
@@ -24,7 +25,7 @@ public class CostumerController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody CostumerRequest request){
+    public ResponseEntity<Costumer> save(@RequestBody CostumerRequest request){
         var costumer = request.toModel();
         service.save(costumer);
         URI headerLocation = ServletUriComponentsBuilder
@@ -36,7 +37,7 @@ public class CostumerController {
     }
 
     @GetMapping(params = "cpf")
-    public ResponseEntity<?> getCostumer(@RequestParam("cpf") String cpf){
+    public ResponseEntity<Optional<Costumer>> getCostumer(@RequestParam("cpf") String cpf){
         var costumer = service.getByCpf(cpf);
         if (costumer.isEmpty()){
             return ResponseEntity.notFound().build();
