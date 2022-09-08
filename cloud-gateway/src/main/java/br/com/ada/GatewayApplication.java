@@ -23,6 +23,7 @@ public class GatewayApplication
         return builder
                 .routes()
                     .route(r -> r.path("/costumers/**").uri("lb://costumer-microservice"))
+                    .route(r -> r.path("/cards/**").uri("lb://card-microservice"))
                 .build();
     }
 }
